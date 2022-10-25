@@ -1,19 +1,39 @@
-const express = require('express')
-const router = express.Router()
+const express = require("express");
+const router = express.Router();
 
 //Middlewares
-const validate = require('../middlewares/handleValidation')
+const validate = require("../middlewares/handleValidation");
 const {
-    userCreateValidation, 
-    loginValidation} = require('../middlewares/userValidation')
-const authGuard = require('../middlewares/authGuard')
+	userCreateValidation,
+	loginValidation,
+	userUpdateValidation,
+} = require("../middlewares/userValidation");
+
+const authGuard = require("../middlewares/authGuard");
+const { imageUpload } = require("../middlewares/imageUpload");
 
 //Controller
-const {register, login, getCurrentUser} = require('../controllers/UserController')
+const {
+	register,
+	login,
+	getCurrentUser,
+	update,
+	getUserById,
+} = require("../controllers/UserController");
 
 //Routes
-router.post('/register', userCreateValidation() ,validate, register)
-router.post('/login', loginValidation(), validate, login)
-router.get('/profile', authGuard, getCurrentUser)
+router.post("/register", userCreateValidation(), validate, register);
+router.post("/login", loginValidation(), validate, login);
+router.get("/profile", authGuard, getCurrentUser);
+router.put(
+	"/",
+	authGuard,
+	userUpdateValidation(),
+	validate,
+	imageUpload.single("profileImage"),
+	update
+);
 
-module.exports = router
+router.get("/:id", getUserById);
+
+module.exports = router;
