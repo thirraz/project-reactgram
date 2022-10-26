@@ -13,16 +13,22 @@ export const NavBar = () => {
     return (
         <nav>
             <Link to="/">ReactGram</Link>
-            <form>
+            <form id="search-form">
+                <input type="text" placeholder="Search" />
                 <BsSearch />
-                <input type="text" />
             </form>
-            <ul className="nav-links">
-                <NavLink to="/">
-                    <BsHouseDoorFill />
-                </NavLink>
-                <NavLink to="/login">Sign In</NavLink>
-                <NavLink to="/register">Sign Up</NavLink>
+            <ul id="nav-links">
+                <li>
+                    <NavLink to="/">
+                        <BsHouseDoorFill />
+                    </NavLink>
+                </li>
+                <li>
+                    <NavLink to="/login">Sign In</NavLink>
+                </li>
+                <li>
+                    <NavLink to="/register">Sign Up</NavLink>
+                </li>
             </ul>
         </nav>
     )
