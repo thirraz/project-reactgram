@@ -85,7 +85,8 @@ export const Register = () => {
                 {error && <Message msg={error} type="error" />}
             </form>
             <p>
-                Already have an account? <Link to="/login">Create one</Link>!
+                Already have an account? <br />
+                <Link to="/login">Create one</Link>!
             </p>
         </div>
     )

@@ -11,6 +11,10 @@ nav a {
     color: #fafafa;
 }
 
+span {
+    margin-left: 1rem;
+}
+
 #search-form {
     position: relative;
     display: flex;
