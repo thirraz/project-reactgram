@@ -7,6 +7,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom"
 import { Home } from "./pages/Home/Home"
 import { Login } from "./pages/Auth/Login"
 import { Register } from "./pages/Auth/Register"
+import { EditProfile } from "./pages/EditProfile/EditProfile"
 
 //Components
 import { NavBar } from "./components/NavBar/NavBar"
@@ -32,6 +33,12 @@ const App = () => {
                             path="/"
                             element={auth ? <Home /> : <Navigate to="/login" />}
                         />
+
+                        <Route
+                            path="/profile"
+                            element={auth ? <EditProfile /> : <Login />}
+                        />
+
                         <Route
                             path="login"
                             element={!auth ? <Login /> : <Navigate to="/" />}

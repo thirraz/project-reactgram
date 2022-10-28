@@ -1,0 +1,25 @@
+#edit-profile {
+    border: 1px solid #363636;
+    background: rgb(17, 17, 17);
+    border-radius: 10px;
+    padding: 1.5rem 2rem;
+    max-width: 40%;
+    margin: 2rem auto;
+    text-align: center;
+}
+
+input[type="email"]:disabled {
+    background: rgb(17, 17, 17);
+    cursor: not-allowed;
+}
+
+.subtitle {
+    color: #ccc;
+}
+
+.profile-image {
+    width: 9.375rem;
+    height: 9.375rem;
+    border-radius: 50%;
+    margin-bottom: 1rem;
+}

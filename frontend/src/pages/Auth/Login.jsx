@@ -59,7 +59,6 @@ export const Login = () => {
                 ) : (
                     <input type="submit" value="Sign In" />
                 )}
-
                 {error && <Message msg={error} type="error" />}
             </form>
             <p>
