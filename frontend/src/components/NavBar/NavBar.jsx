@@ -1,13 +1,13 @@
-import './NavBar.css'
+import "./NavBar.css"
 
 //Components
-import { NavLink, Link } from 'react-router-dom'
+import { NavLink, Link } from "react-router-dom"
 import {
     BsSearch,
     BsHouseDoorFill,
     BsFillPersonFill,
     BsFillCameraFill,
-} from 'react-icons/bs'
+} from "react-icons/bs"
 
 export const NavBar = () => {
     return (
