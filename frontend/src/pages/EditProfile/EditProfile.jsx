@@ -7,7 +7,7 @@ import { useEffect, useState } from "react"
 import { useSelector, useDispatch } from "react-redux"
 
 //Redux
-import { profile, resetMessage } from "../../slices/userSlice"
+import { profile, updateProfile, resetMessage } from "../../slices/userSlice"
 
 //Components
 import { Message } from "../../components/Message/Message"
@@ -17,7 +17,6 @@ export const EditProfile = () => {
 
     const { user, message, error, loading } = useSelector((state) => state.user)
 
-    //States
     const [name, setName] = useState("")
     const [email, setEmail] = useState("")
     const [password, setPassword] = useState("")
@@ -25,32 +24,60 @@ export const EditProfile = () => {
     const [bio, setBio] = useState("")
     const [previewImage, setPreviewImage] = useState("")
 
-    //Load your data
+    // Load user data
     useEffect(() => {
         dispatch(profile())
     }, [dispatch])
 
-    //Fill form with user data
+    // fill user form
     useEffect(() => {
         if (user) {
             setName(user.name)
             setEmail(user.email)
             setBio(user.bio)
         }
-    })
+    }, [user])
 
-    console.log(user)
-
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault()
+
+        // Gather user data from states
+        const userData = {
+            name,
+        }
+
+        if (profileImage) {
+            userData.profileImage = profileImage
+        }
+
+        if (bio) {
+            userData.bio = bio
+        }
+
+        if (password) {
+            userData.password = password
+        }
+
+        // build form data
+        const formData = new FormData()
+
+        Object.keys(userData).forEach((key) =>
+            formData.append(key, userData[key]),
+        )
+        dispatch(updateProfile(formData))
+
+        setTimeout(() => {
+            dispatch(resetMessage())
+        }, 2000)
     }
 
     const handleFile = (e) => {
-        //Image preview
+        // image preview
         const image = e.target.files[0]
+
         setPreviewImage(image)
 
-        //Update image state
+        // change image state
         setProfileImage(image)
     }
 
@@ -109,7 +136,13 @@ export const EditProfile = () => {
                         value={password || ""}
                     />
                 </label>
-                <input type="submit" value="Update" />
+                {loading ? (
+                    <input type="submit" value="Loading..." disabled />
+                ) : (
+                    <input type="submit" value="Update" />
+                )}
+                {error && <Message msg={error} type="error" />}
+                {message && <Message msg={message} type="success" />}
             </form>
         </div>
     )
